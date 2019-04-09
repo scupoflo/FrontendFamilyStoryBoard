@@ -9,10 +9,9 @@ class App extends Component {
     return (
       <div className="App">
         <FamilyTree/>
-      </div>
+      </di>
         
     );
   }
 }
 export default App;
-

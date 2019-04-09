@@ -1,0 +1,221 @@
+//Nav Bar?
+2.) Onclick of edit family tree in app console logs but doesn't re-route to edit Home Page.
+3.) When I go to CustomizeHomePage, Home Page is still below ...finish route lecture to fix
+4.) On Customize, fix how cards look to only show edit cards with edit and delete buttons and home
+page not to have those options
+
+
+Stretch
+1.)Add toggle feature to group card that shows the members listed in this group in home page
+2.) code for Stretch Feature is having this Announcements and Questions Page
+// <Grid.Row>
+//   <Grid.Column verticalAlign='middle'>
+//     Announcements and Questions and forums!
+//       <Grid.Row> Post 1 </Grid.Row>
+//       <Grid.Row> Post 2 </Grid.Row>
+//       <Grid.Row> Post 3 </Grid.Row>
+//       <Grid.Row> Post 4 </Grid.Row>
+//       <Grid.Row> Post 5 </Grid.Row>
+//   </Grid.Column>
+// </Grid.Row>
+
+
+
+
+
+// <Route
+//    exact path="/"
+//    render={ ()=>
+//      <Redirect to="/editHome"/>
+//    }
+//  />
+//
+// <Route
+//    exact path="/groupShowPage"
+//    render={ ()=>
+//      <GroupShowPage/>
+//     }
+// />
+//
+// <Route
+//    exact path="/editHome"
+//    render={ ()=>
+//      <CustomizeHomePage
+//         allGroups={this.state.allGroups} handleClick={this.handleClick}/>
+//     }
+// />
+
+
+import React, { Component } from 'react';
+import FamilyGroupList from './FamilyGroupList';
+import ShowContainer from './ShowContainer';
+import GroupContainer from './GroupContainer';
+import SearchBar from './SearchBar';
+
+class FamilyTree extends Component {
+  constructor(){
+    super()
+      this.state= {
+      
+    }
+  }
+
+
+
+  render() {
+    return (
+      <div className="app">
+        <FamilyGroupList />
+        <ShowContainer />
+        <GroupContainer />
+        <SearchBar />
+        <button> View Family Requests </button>
+        <button> Invite Family </button>
+      </div>
+    );
+  }
+}
+
+export default FamilyTree;
+
+
+
+
+import React, { Component } from 'react';
+import { Card } from 'semantic-ui-react'
+import { Container, Divider, Grid, Header, Image } from 'semantic-ui-react'
+import './App.css';
+import GroupList from './containers/GroupList'
+import {Route, Link, Redirect, Switch} from 'react-router-dom'
+import CustomizeHomePage from './MainPages/CustomizeHomePage';
+import { Button, Segment } from 'semantic-ui-react'
+import GroupShowPage from './MainPages/GroupShowPage'
+import GroupForumModal from './containers/GroupForumModal'
+class App extends Component {
+  constructor(){
+    super()
+    this.state={
+      allGroups:[],
+      searchTerm: "",
+      loading:true
+    }
+  }
+
+  componentDidMount = () => {
+      fetch(`http://localhost:3000/api/v1/groups`)
+      .then(resp => resp.json())
+      .then(allGroupData => {
+        console.log(allGroupData.slice(0,6))
+        let withOutRepeatsArr= allGroupData.slice(0,6)
+       return this.setState({
+         allGroups:withOutRepeatsArr,
+         loading:false
+       })
+      }
+     )
+    }
+
+
+
+  InlineStyle = () => (
+  <style>{`
+    .grid {
+      position: relative;
+    }
+    .grid:before {
+      background-color: #F0F0F0;
+      box-shadow: 0px 0px 0px 1px #DDDDDD inset;
+      content: '';
+      height: calc(100% - 2rem);
+      left: 1rem;
+      top: 1rem;
+      position: absolute;
+      width: calc(100% - 2rem);
+     }
+    .ui.divided.grid:before, .celled.grid:before {
+      display: none;
+    }
+    .ui.aligned .column:after {
+      display: none !important;
+    }
+    .grid .column:not(.row):not(.grid):after {
+      background-color: rgba(86, 61, 124, .15);
+      box-shadow: 0px 0px 0px 1px rgba(86, 61, 124, 0.2) inset;
+      content: '';
+      display: block;
+      min-height: 50px;
+    }
+    @media only screen and (max-width: 768px) {
+      .stackable.grid:before {
+        width: 100%;
+        left: 0em;
+      }
+    }
+  `}
+  </style>
+)
+
+
+
+  render() {
+
+    //Two Containers Vertically
+    //To install Navbar routes, go to 58 min in video lecture
+    return (
+      <Grid>
+        <Grid.Row centered>
+          <h1> My Family Tree!! </h1>
+        </Grid.Row>
+
+        <Grid.Row>
+          <Grid columns='equal'>
+            <Grid.Column>
+              <Switch>
+                <Route
+                  path="/groups/:id"
+                  render={(props)=> {
+                    let groupId= props.match.params.id
+                    let group= this.state.allGroups.find(g => g.id === groupId)
+                    return this.state.loading ? null : (
+                      <GroupForumModal group={group}/>
+                    )
+                  }}/>
+              
+
+              <Route
+                path="/editHome"
+                render={ (props)=> {
+                  return (
+                    <CustomizeHomePage allGroups={this.state.allGroups}/>)
+                }}
+               />
+
+               <Route
+                path="/"
+                render={ (props)=>
+                  <GroupList allGroups={this.state.allGroups} />}
+              />
+              <Grid.Row>
+              <Segment compact>
+                <Link to= "/editHome">
+                <Button inverted color='purple'>
+                  Edit Family Tree
+                </Button>
+               </Link>
+              </Segment>
+          </Grid.Row>
+
+           </Switch>
+            <br/>
+            </Grid.Column>
+            
+          </Grid>
+        </Grid.Row>
+    </Grid>
+
+    );
+  }
+}
+
+
+export default App;
