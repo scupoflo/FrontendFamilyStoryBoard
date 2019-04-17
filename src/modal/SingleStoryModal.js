@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Image,Button, Icon, Modal } from 'semantic-ui-react'
+import { Button, Icon, Modal } from 'semantic-ui-react'
+import CreatePost from '../components/CreatePost'
 
-class GroupForumModal extends Component {
+class SingleStoryModal extends Component {
   state = { open: false }
 
   open = () => this.setState({ open: true })
@@ -18,19 +19,19 @@ class GroupForumModal extends Component {
         size='small'
         trigger={
           <Button primary icon>
-            Proceed <Icon name='right chevron' />
+            Add a Post <Icon name='right chevron' />
           </Button>
         }
       >
-        <Modal.Header>Modal #2</Modal.Header>
+        <Modal.Header>Story Title!</Modal.Header>
         <Modal.Content>
-          <p>That's everything!</p>
+          <CreatePost handleNewPost={this.props.handleNewPost}/>
         </Modal.Content>
         <Modal.Actions>
-          <Button icon='check' content='All Done' onClick={this.close} />
+          <Button icon='check' content='Go Back' onClick={this.close} />
         </Modal.Actions>
       </Modal>
     )
   }
 }
-export default GroupForumModal
+export default SingleStoryModal

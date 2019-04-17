@@ -1,61 +1,83 @@
 import React, { Component } from 'react';
-import { Container, Divider, Grid, List, Header, Image } from 'semantic-ui-react'
-import _ from 'lodash'
+import {Grid} from 'semantic-ui-react'
+import MemberCard from '../components/MemberCard';
+import PersonalPostModal from '../modal/PersonalPostModal'
+import FamilyPostModal from '../modal/FamilyPostModal'
 import { Card } from 'semantic-ui-react'
-import GroupForumModal from '../containers/GroupForumModal'
+
 
 class GroupShowPage extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
       this.state= {
-
+        allPosts: [],
+        author: null
+        
     }
   }
 
-//need to make a decision if going to put a search bar yet
-  // handleSearchChange = (e, { value }) => {
-  //   console.log('searching')
-  //   this.setState({ searchTerm: value })
-  // }
-
-  componentDidMount = () = {
-    
+componentDidMount = () => {
+  fetch(`http://localhost:3000/api/v1/users`)
+  .then(resp => resp.json())
+  .then(allData => {
+    console.log(allData[0].posts)
+    let firstUserPostData= allData[0].posts
+      return this.setState({
+        allPosts:firstUserPostData,
+        author: allData[0]
+      })
   }
+ )
+}
+
+handleNewPost = (newPost) => {
+  console.log(newPost)
+    this.setState({
+      allPosts: [...this.state.allPosts,newPost]
+    })
+  }
+
+
+
+  
 
   render() {
     return (
       <Grid celled>
 
           <Grid.Row>
-            Family Members Listed in Group
+              <Card.Group centered stackable>
+                {this.props.group.members.map(member=> 
+                  <Grid.Column centered stackable>
+                    <MemberCard 
+                    key={member.name}
+                    member={member}/>
+                  </Grid.Column>)}
+              </Card.Group>
+              
           </Grid.Row>
+         
 
           <Grid.Row>
               <Grid.Column floated="right" width={8}>
-
+                <PersonalPostModal 
+                  handleNewPost={this.handleNewPost}
+                  author={this.state.author}
+                  allPosts={this.state.allPosts}
+                />
               </Grid.Column>
 
               <Grid.Column floated="left" width={8}>
-
+                <FamilyPostModal
+                  handleNewPost={this.handleNewPost}
+                  author={this.state.author}
+                  allPosts={this.state.allPosts}
+                />
               </Grid.Column>
           </Grid.Row>
 
+        
 
-
-
-
-
-
-
-
-        <Grid.Column floated="right" width={6}>
-          
-      	</Grid.Column>
-
-
-        <Grid.Row>
-          <Grid.Column> </Grid.Column>
-        </Grid.Row>
       </Grid>
 
     );

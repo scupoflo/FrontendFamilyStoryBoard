@@ -10,27 +10,23 @@ class MemberCard extends Component {
     }
   }
 
+  
+
   render() {
+    console.log(this.props.members)
     return (
-          <Card>
-            <Card.Content>
-              <Image floated='right' size='mini' src='https://react.semantic-ui.com/images/avatar/large/steve.jpg' />
-              <Card.Header>Steve Sanders</Card.Header>
-              <Card.Meta>Friends of Elliot</Card.Meta>
+          <Card color="olive" raised>
+            <Card.Content> 
+              
+              <Card.Header color="olive">{this.props.member.name}</Card.Header>
+              
+              <Image centered  size='medium' src={this.props.member.picture} />
+              <Card.Meta></Card.Meta>
               <Card.Description>
-                Steve wants to add you to the group <strong>best friends</strong>
+               <strong>{this.props.member.relationship}</strong>
               </Card.Description>
             </Card.Content>
-            <Card.Content extra>
-              <div className='ui two buttons'>
-                <Button basic color='green'>
-                  Approve
-                </Button>
-                <Button basic color='red'>
-                  Decline
-                </Button>
-              </div>
-            </Card.Content>
+
           </Card>
     );
   }

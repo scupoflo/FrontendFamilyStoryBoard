@@ -1,39 +1,21 @@
 import React, { Component } from 'react';
-import { Button, Card, Image } from 'semantic-ui-react'
+import {Card, Image } from 'semantic-ui-react'
 
-
-class GroupCard extends Component {
-  constructor(){
-    super()
-      this.state= {
-
-    }
-  }
-
+class EditGroupCard extends Component {
   render() {
-
-    //this has the buttons where the original doesn't
     return (
-          <Card>
+      <div id={this.props.group.name}>
+          <Card onClick={()=>this.props.handleClick(this.props.group)}>
             <Card.Content>
-              <Image centered size='small' src={"https://www.family-action.org.uk/content/uploads/2017/11/Mixed-Raced-family-e1513084049363-600x320.jpg"} />
+              <Image centered  src={this.props.group.picture} />
               <br/>
               <br/>
               <Card.Header>{this.props.group.name}</Card.Header>
             </Card.Content>
-            <Card.Content extra>
-              <div className='ui two buttons'>
-                <Button basic color='green'>
-                  Edit
-                </Button>
-                <Button basic color='red'>
-                  Delete
-                </Button>
-              </div>
-            </Card.Content>
           </Card>
+      </div>
     );
   }
 }
 
-export default GroupCard;
+export default EditGroupCard;

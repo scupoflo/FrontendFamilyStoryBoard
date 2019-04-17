@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Divider, Grid, Header, Image } from 'semantic-ui-react'
+import {Grid} from 'semantic-ui-react'
 import GroupList from '../containers/GroupList'
-import {Route, Link, Redirect, Switch} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { Button, Segment } from 'semantic-ui-react'
 
 class Home extends Component {
@@ -13,10 +13,7 @@ class Home extends Component {
     }
   }
 
-  handleClick = (groupObj) => {
-    console.log(groupObj)
-    this.setState({selectedCard: groupObj})
-  }
+ 
 
 
   render() {
@@ -31,7 +28,9 @@ class Home extends Component {
           <Grid.Column>
             <GroupList 
               allGroups={this.props.allGroups}
-              handleClick= {this.handleClick}
+              handleClick= {this.props.handleClick}
+              groupObj={this.props.groupObj}
+              members={this.props.members}
              />
           </Grid.Column>
             <Grid.Row>
