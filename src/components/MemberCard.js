@@ -15,15 +15,23 @@ class MemberCard extends Component {
   render() {
     console.log(this.props.members)
     return (
-          <Card color="olive" raised>
+          <Card fluid raised color="olive">
             <Card.Content> 
               
-              <Card.Header color="olive">{this.props.member.name}</Card.Header>
+              <Card.Header color="olive">
+                <h1>
+                  {this.props.member.name}
+                </h1>
+              </Card.Header>
               
-              <Image centered  size='medium' src={this.props.member.picture} />
+              <Image as='div' centered  size='medium' circular fluid src={this.props.member.picture} />
               <Card.Meta></Card.Meta>
               <Card.Description>
-               <strong>{this.props.member.relationship}</strong>
+               <strong>
+                 <h2>
+                  {this.props.member.relationship}
+                 </h2>
+                </strong>
               </Card.Description>
             </Card.Content>
 

@@ -43,23 +43,22 @@ handleNewPost = (newPost) => {
 
   render() {
     return (
-      <Grid celled>
-
-          <Grid.Row>
-              <Card.Group centered stackable>
-                {this.props.group.members.map(member=> 
-                  <Grid.Column centered stackable>
-                    <MemberCard 
-                    key={member.name}
-                    member={member}/>
-                  </Grid.Column>)}
+      <Grid columns='equal' >
+          <Grid.Row centered>
+            <Grid.Column centered >
+              <Card.Group centered itemsPerRow={6}>
+                {this.props.group.members.map(member=>        
+                  <MemberCard 
+                  key={member.name}
+                  member={member}/>
+                )}
               </Card.Group>
-              
+            </Grid.Column>
           </Grid.Row>
          
 
           <Grid.Row>
-              <Grid.Column floated="right" width={8}>
+              <Grid.Column  width={8}>
                 <PersonalPostModal 
                   handleNewPost={this.handleNewPost}
                   author={this.state.author}
@@ -67,8 +66,9 @@ handleNewPost = (newPost) => {
                 />
               </Grid.Column>
 
-              <Grid.Column floated="left" width={8}>
+              <Grid.Column  width={8}>
                 <FamilyPostModal
+                  group={this.props.group}
                   handleNewPost={this.handleNewPost}
                   author={this.state.author}
                   allPosts={this.state.allPosts}

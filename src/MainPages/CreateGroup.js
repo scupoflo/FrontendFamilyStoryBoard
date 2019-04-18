@@ -39,7 +39,7 @@ class CreateGroup extends Component {
       }).then(resp => resp.json())
       .then(newGroup => {
         console.log(newGroup)
-        return this.props.handleShowCard(newGroup)
+        return this.props.handleShowCard(newGroup) && this.props.addGroup(newGroup)
       })
     }
   

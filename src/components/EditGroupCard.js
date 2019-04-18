@@ -4,16 +4,16 @@ import {Card, Image } from 'semantic-ui-react'
 class EditGroupCard extends Component {
   render() {
     return (
-      <div id={this.props.group.name}>
-          <Card onClick={()=>this.props.handleClick(this.props.group)}>
+      
+          <Card fluid raised color="green" onClick={()=>this.props.handleDeleteGroup(this.props.group)}>
             <Card.Content>
-              <Image centered  src={this.props.group.picture} />
-              <br/>
-              <br/>
+              <Image as='div' centered size='medium' fluid src={this.props.group.picture} />
+            </Card.Content>  
+            <Card.Content>
               <Card.Header>{this.props.group.name}</Card.Header>
             </Card.Content>
           </Card>
-      </div>
+      
     );
   }
 }

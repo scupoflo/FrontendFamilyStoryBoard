@@ -15,12 +15,12 @@ class RenderShowCard extends Component {
   render() {
       console.log(this.props.selectedToShow)
     return (
-          <Card>
+          <Card fluid raised color="green" onClick={this.props.handleAddMemberToGroup}>
             <Card.Content> 
               
               <Card.Header>{this.props.selectedToShow.name}</Card.Header> 
               
-              <Image floated='center' size='small' src={this.props.selectedToShow.picture} />
+              <Image size='small' src={this.props.selectedToShow.picture} />
               <Card.Meta></Card.Meta>
               <Card.Description>
                   { (this.props.selectedToShow.relationship) ? <strong>{this.props.selectedToShow.relationship}</strong> : null }
@@ -28,8 +28,6 @@ class RenderShowCard extends Component {
                
               </Card.Description> 
               <Card.Description>
-                  { 'where group name should show' }
-                
                
               </Card.Description> 
             </Card.Content>
@@ -40,12 +38,6 @@ class RenderShowCard extends Component {
 
   
 
-//   render() {
-//     console.log('it worked')
-//   return (
-        
-//   );
-// }
 
 
 }

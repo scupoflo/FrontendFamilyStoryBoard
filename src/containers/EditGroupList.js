@@ -14,17 +14,18 @@ class EditGroupList extends Component {
 
   render(){
     return(
-      <div>
-        <Card.Group>
+      
+        <Card.Group centered itemsPerRow={3}>
           {this.props.allGroups.map(group => (
             <EditGroupCard 
               key={group.name} 
               group={group}
               handleClick={this.props.handleClick}
+              handleDeleteGroup={this.props.handleDeleteGroup}
             />
           ))}
         </Card.Group>
-      </div>
+      
     )
   }
 }

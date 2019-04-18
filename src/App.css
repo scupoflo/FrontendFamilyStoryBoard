@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  background-image: url('https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-color: #000000;
+  height: 2000px;
+  /* margin-right: 0px; */
 }
 
  .App-logo {
@@ -8,6 +14,32 @@
   pointer-events: none;
 }
 
+
+
+
+.ui.centered.fluid.image {
+  height: 300px;
+  overflow: hidden;
+  align-items: center;
+  position: relative;
+  display: flex;
+}
+
+.ui.centered.fluid.image > img {
+  position: relative;
+}
+
+.ui.card>.content, {
+  height: 300px;
+  overflow: hidden;
+  align-items: center;
+  position: relative;
+  display: flex;
+}
+
+.ui.card>.content > img {
+  position: relative;
+}
 .App-header {
   background-color: #282c34;
   min-height: 50vh;
@@ -77,4 +109,9 @@
 }
  body {
   padding: 2em;
+}
+
+.groupCard {
+  max-height: 436.82px;
+  min-height: 436.82px 
 }

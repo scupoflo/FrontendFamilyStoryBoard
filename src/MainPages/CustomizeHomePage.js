@@ -1,109 +1,161 @@
 import React, { Component } from 'react';
-import {Grid} from 'semantic-ui-react'
+import {Grid,Card} from 'semantic-ui-react'
 import _ from 'lodash'
 import EditGroupList from '../containers/EditGroupList'
-import { Link} from 'react-router-dom'
+
 import RequestFamilyCard from '../components/RequestFamilyCard';
-import { array } from 'prop-types';
+
 import AddMemberToGroup from '../containers/AddMemberToGroup';
-import CreateMember from './CreateMember'
+
 
 class CustomizeHomePage extends Component {
   constructor(){
     super()
       this.state= {
-        allgroups: [],
+        allGroups: [],
+        allMembers:[],
         draggedItem: {},
-        draggedOverItem: {},
-        searchTerm: '',
-        chosenGroup: {}
+        chosenGroup: {},
+        deleteMember:{}
     }
   }
 
   
-
-  // handleSearchChange = (e, { value }) => {
-  //   console.log('searching')
-  //   this.setState({ searchTerm: value })
-  // }
-
-  // handleUpdateDraggedItemState = item => {
-  //   console.log("Dragged Item:", item)
-  //   this.setState({draggedItem: item})
-  // }
-
-  // handleUpdateDraggedOverState = item => {
-  //   debugger
-  //   console.log("Dragged Over:", item)
-  //   this.setState({draggedOver: item})
-  // }
 
   handleClick = (group) => {
     console.log('Group clicked:', group.name)
     this.setState({chosenGroup: group})
   }
 
-// 1.) Grab the onDrop Item and parse into an object 
-// 2.) get access to their members array
-// 3.) find if draggedItem id matches id of member inside of array 
-//   if it does, do not add into array
-//   if it does not, add into array
-// 4.) Take out of family members that needs to be assigned a group
-
-handleAddMemberToGroup = () => {
-  debugger
-}
 
 
-
-
-
-  // if this.state.chosenGroup.members.filter(member=> member.id === this.state.draggedItem.id)
-  // Do Not include in this.state.chosenGroup.memember array
-  // if member.id != this.state.chosenGroup.member.id ===> add card into array
+  handleDelete = (memberToDelete) => {
+    console.log(memberToDelete)
+    let newArr= this.state.allMembers.filter(member=>  {
+      return member.id !== memberToDelete.id
+    })
+    this.setState({
+      allMembers: newArr
+    })     
+  }
 
   addToShow = (object) => {
     
     console.log('YESSSSS',object)
     }
-    // if (this.state.draggedItem.kind === 'serve_tool') {
-    //   this.setState({serveGroup: []})
-    //   this.addShakeClass(".trash-image")
-    // }
-    // if (this.state.draggedItem.kind === 'serve_ingredient') {
-    //   this.setState({serveGroup: []})
-    //   this.addShakeClass(".trash-image")
-    // }
-  
+
+  handleDeleteGroup = (groupToDelete) => {
+    console.log(groupToDelete)
+    let newArr= this.state.allGroups.filter(group =>  {
+      return group.id !== groupToDelete.id
+    })
+    this.setState({
+      allGroups: newArr
+    })     
+  }
+
+  // handleAddRequestingMember = () => {
+  //   this.props.allGroups.map(group=> {
+  //     if(group.members.length > 0){
+  //       group.members.map(member=> (
+  //       this.setState({ 
+  //         allMembers: [...this.state.allMembers, member]
+  //       })
+  //       ))
+  //     }
+  //   })
+  // }
+
+  // componentDidMount = () => {
+  //   fetch(`http://localhost:3000/api/v1/members`)
+  //   .then(resp => resp.json())
+  //   .then(allNewMembers => {
+  //    return this.setState({
+  //      allMembers: allNewMembers
+
+  //    })
+  //   }
+  //  )
+  // }
+
+  componentDidMount = () => {
+    Promise.all([
+      fetch(`http://localhost:3000/api/v1/groups`),
+      fetch(`http://localhost:3000/api/v1/members`)
+    ])
+    .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+    .then(([allGroups, allMembers])=>{
+      console.log(allGroups);
+      console.log(allMembers);
+      
+ 
+      return this.setState({
+        allGroups: allGroups,
+        allMembers: allMembers,
+      })
+    })
+  }
+   
+  addMember=(newMember)=>{
+    this.setState({
+      allMembers: [...this.state.allMembers, newMember]
+    })
+  }
+
+  addGroup=(newGroup)=>{
+    this.setState({
+      allGroups: [...this.state.allGroups, newGroup]
+    })
+  }
+
+  // componentDidMount(){
+  //   // Promise.all allows multiple fetches to be done simultaneously, see below link
+  //   // https://medium.com/@ahnahn.un/a-brief-intro-to-promise-all-92291d93780c
+  //   Promise.all([
+  //     fetch(‘http://localhost:3000/users/1’),
+  //     fetch(‘http://localhost:3000/users/1/messages’),
+  //     fetch(‘http://localhost:3000/users’)
+ 
+  //   ])
+  //   .then(([res1, res2) => Promise.all([res1.json(), res2.json()]))
+  //   .then(([allGroups, allMembers])=>{
+  //     console.log(allGroups);
+  //     console.log(allMembers);
+      
+ 
+  //     return this.setState({
+  //       allGroups: allGroups,
+  //       allMembers: allMembers,
+  //     })
+  //   })
+  // }
+
 
   render() {
     return (
-      <Grid celled>
-      {/* <Link to={`/editHome}`}> </Link> */}
-        <Grid.Column floated="left" width={6}>
+      <Grid columns='equal' >
+        <Grid.Column  width={5}>
             <AddMemberToGroup
-                allGroups={this.props.allGroups}  
+                allGroups={this.state.allGroups}  
                 chosenGroup={this.state.chosenGroup}
                 handleAddMemberToGroup={this.handleAddMemberToGroup}
                 addToShow={this.addToShow}
+                handleAddMemberToGroup={this.handleAddMemberToGroup}
+                addMember={this.addMember}
             />
           
         </Grid.Column>
 
 
-        <Grid.Column 
-            floated="right" 
-            width={10}
-            onDragOver={e => {
-              console.log(e.currentTarget.id)
-              debugger
-              console.log(e.currentTarget.id)}}
-            onDrop={e => {e.preventDefault(); this.handleAddMemberToGroup()}}>
-          <EditGroupList 
-             allGroups={this.props.allGroups} 
-             handleClick={this.handleClick}
-             handleUpdateDraggedOverState={this.handleUpdateDraggedOverState} />
-       
+        <Grid.Column width={11}>
+          
+            <EditGroupList 
+              allGroups={this.state.allGroups} 
+              handleClick={this.handleClick}
+              addGroup={this.addGroup}
+              handleDeleteGroup={this.handleDeleteGroup}    
+            />
+          
       	</Grid.Column>
 
 
@@ -114,20 +166,27 @@ handleAddMemberToGroup = () => {
                showNoResults={false} 
           />   */}
         </Grid.Row>
+        
+       
+          <Grid.Row> 
           
-        <Grid.Row>
+            {this.state.allMembers.map(member=>  
+              <Grid.Column>
+                
+                  <RequestFamilyCard 
+                    member={member}
+                    handleDelete={this.handleDelete}
+                  />
+                
+              </Grid.Column>
+              )}
+        
+          
          
-          {this.props.allGroups.map(group=> {
-            if(group.members.length > 0){
-            return (group.members.map((member, index) => 
-              <RequestFamilyCard 
-                member={member}
-                draggable={true}
-                handleUpdateDraggedItemState={(member)=> this.handleUpdateDraggedItemState(member)}/>
-              ))}
-          })}
-          
+            
+        
         </Grid.Row>
+        
       </Grid>
    
     );
@@ -135,3 +194,4 @@ handleAddMemberToGroup = () => {
 }
 
 export default CustomizeHomePage;
+

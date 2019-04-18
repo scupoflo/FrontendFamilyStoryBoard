@@ -13,7 +13,8 @@ class FamilyTree extends Component {
       allGroups:[],
       searchTerm: "",
       loading:true,
-      selectedCard:null
+      selectedCard:null,
+      allMembers:[]
     }
   }
 
@@ -25,7 +26,7 @@ class FamilyTree extends Component {
        return this.setState({
          allGroups:withOutRepeatsArr,
          loading:false,
-         allMembers: []
+         allMembers: allGroupData.members
        })
       }
      )

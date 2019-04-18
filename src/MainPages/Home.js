@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {Grid} from 'semantic-ui-react'
+import {Grid, Reveal } from 'semantic-ui-react'
 import GroupList from '../containers/GroupList'
 import {Link} from 'react-router-dom'
 import { Button, Segment } from 'semantic-ui-react'
+import { Header, Icon, Image } from 'semantic-ui-react'
 
 class Home extends Component {
   constructor(){
@@ -20,12 +21,19 @@ class Home extends Component {
     return ( 
   <Grid>    
     <Grid.Row centered>
-      <h1> My Family Tree!! </h1>
+    <Header as='div' id="background" icon textAlign='center'>
+    
+    <Header.Content>My Family Tree!!</Header.Content>
+    
+    
+    </Header>
+      
     </Grid.Row>
 
       <Grid.Row>
         <Grid columns='equal'>
           <Grid.Column>
+            
             <GroupList 
               allGroups={this.props.allGroups}
               handleClick= {this.props.handleClick}

@@ -6,11 +6,10 @@ class CreateMember extends Component {
   constructor(props){
     super(props)
       this.state={
-        id: '',
         name: '',
         picture: '',
         relationship: '',
-        group: ""
+        group: ''
       }
     }
       
@@ -31,15 +30,44 @@ class CreateMember extends Component {
    
   handleSubmit = event => {
     event.preventDefault();
+    let name = this.state.name
+    let picture= this.state.picture
+    let relationship= this.state.relationship
+    let group = this.state.group
+    
+    let data={
+      name: name,
+      picture:picture,
+      relationship:relationship,
+      group:group
+    }
+
+    
     fetch('http://localhost:3000/api/v1/members', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(data)
     }).then(resp => resp.json())
-    .then(newMember => this.props.handleShowCard(newMember))
-  }
+    .then(newMember => {
+      console.log(newMember)
+      return this.props.handleShowCard(newMember) && this.props.addMember(newMember)
+      })
+    }
+  
+  // handleSubmit = event => {
+  //   event.preventDefault();
+  //   fetch('http://localhost:3000/api/v1/members', {
+  //     method: 'POST',
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify(this.state)
+  //   }).then(resp => resp.json())
+  //   .then(newMember => this.props.handleShowCard(newMember))
+  // }
+    
 
  
  
@@ -84,7 +112,7 @@ class CreateMember extends Component {
             placeholder='Add Name of Group to Add!'
             type="text"
             name="group" 
-            onChange={event => this.handleInputChange(event)} 
+            onChange={(e) => this.handleInputChange(e)} 
             value={this.state.group} />
         </Form.Field>
 

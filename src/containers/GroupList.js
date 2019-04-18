@@ -15,7 +15,7 @@ class GroupList extends Component {
   render(){
     return(
       <div>
-        <Card.Group centered stackable>
+        <Card.Group centered itemsPerRow={6}>
           {this.props.allGroups.map(group => (
             <GroupCard 
               key={group.name} 

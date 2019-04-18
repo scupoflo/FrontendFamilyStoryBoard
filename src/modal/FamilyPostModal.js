@@ -18,12 +18,12 @@ const style = {
   },
 }
 const FamilyPostModal = (props) => (
-    <Modal trigger={ <Button size='massive'>Stories About Family</Button>}>
-      <Modal.Header> <h1> Stories About Family!</h1>
+    <Modal trigger={ <Button color='green' size='massive'>Stories About Family</Button>}>
+      <Modal.Header floated='right'> <h1> Stories About Family!</h1>
       <Modal.Content image>
-        <div className='image'>
-          <Image wrapped size ='medium' src={"https://www.family-action.org.uk/content/uploads/2017/11/Mixed-Raced-family-e1513084049363-600x320.jpg"} />
-        </div>
+        {/* <div className='image'> */}
+          <Image wrapped size ='medium' spaced='left' src={props.group.picture} />
+        {/* </div> */}
       </Modal.Content>
       </Modal.Header>
         <Modal.Description>

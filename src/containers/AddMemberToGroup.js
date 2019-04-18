@@ -46,15 +46,6 @@ componentDidMount = () => {
 //     .then(newMember => this.props.handleAddMemberToGroup(newMember))
 //   }
 
-handleNewMember = (newMember) => {
-  console.log(newMember)
-  let a= this.props.allGroups.filter(group => group.name === newMember.name)
-  // if(this.state.group.name )
-    // this.setState({
-    //   all: [...this.state.allMembers,newPost]
-    // })
-  }
-
   
   handleChange = (event) => {
     event.persist()
@@ -67,6 +58,7 @@ handleNewMember = (newMember) => {
     console.log("it's happening")
     if (typeof(object.relationship) !== 'undefined'){
       console.log('its a member!')
+      console.log(object)
       this.setState({selectedToShow: object})
     } else{
       console.log('its a group!')
@@ -109,7 +101,7 @@ handleNewMember = (newMember) => {
               <Grid.Column floated="left" width={8}>
                 <CreateMember 
                   handleShowCard={this.handleShowCard}
-                  handleSubmit={this.handleSubmit}
+                  addMember={this.props.addMember}
                 />
                 
                 
@@ -126,7 +118,9 @@ handleNewMember = (newMember) => {
 
         <Grid.Row>
           <Grid.Column> 
-          <CreateGroup handleShowCard={this.handleShowCard}/>
+          <CreateGroup 
+            handleShowCard={this.handleShowCard}
+            addGroup={this.props.addGroup}/>
           </Grid.Column>
         </Grid.Row>
 

@@ -20,7 +20,7 @@ const style = {
 
 
 const PersonalModal = (props) => (
-    <Modal trigger={ <Button size='massive'> Stories About You!</Button>}>
+    <Modal trigger={ <Button color='green' size='massive'> Stories About You!</Button>}>
       <Modal.Header> <h1> Stories About You!</h1>
       <Modal.Content image>
         <div className='image'>
