@@ -57,14 +57,16 @@ handleNewPost = (newPost) => {
     body: JSON.stringify({id: postToDelete.id})
     })
     .then(res => res.text())
-    .then(res => console.log(res))
-    
-    // let newArr= this.state.allPosts.filter(post=>  {
-    //   return post.id !== postToDelete.id
-    // })
-    // this.setState({
-    //   allPosts: newArr
-    // })     
+    .then(res => this.handleFrontDelete(res))
+  }
+
+    handleFrontDelete = (postToDelete) => {
+    let newArr= this.state.allPosts.filter(post=>  {
+      return post.id !== postToDelete.id
+    })
+    this.setState({
+      allPosts: newArr
+    })     
    }
   
   
@@ -75,13 +77,15 @@ handleNewPost = (newPost) => {
       <Grid columns='equal' >
           <Grid.Row centered>
             <Grid.Column centered >
-              <Card.Group centered itemsPerRow={6}>
-                {this.props.group.members.map(member=>        
+              
+                {this.props.group.members.map(member=>   
+                  <Card.Group centered itemsPerRow={6}>     
                   <MemberCard 
                   key={member.name}
                   member={member}/>
+                   </Card.Group>
                 )}
-              </Card.Group>
+             
             </Grid.Column>
           </Grid.Row>
          

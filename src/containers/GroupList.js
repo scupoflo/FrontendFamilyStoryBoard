@@ -14,9 +14,10 @@ class GroupList extends Component {
 
   render(){
     return(
-      <div>
-        <Card.Group centered itemsPerRow={6}>
+      <Card.Group centered itemsPerRow={6}>
+        
           {this.props.allGroups.map(group => (
+            
             <GroupCard 
               key={group.name} 
               handleClick={this.props.handleClick}
@@ -28,9 +29,10 @@ class GroupList extends Component {
               handleClick={this.props.handleClick} 
               groupObj={this.props.groupObj} 
               toggleImage={this.props.toggleImage} />
+          
           ))}
+        
         </Card.Group>
-      </div>
     )
   }
 }

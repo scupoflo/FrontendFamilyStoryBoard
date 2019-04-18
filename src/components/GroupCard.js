@@ -16,8 +16,8 @@ class GroupCard extends Component {
 
   render() {
     return (
-      <Reveal animated='fade'>
-      <Reveal.Content visible>
+      // <Reveal animated='fade'>
+      // <Reveal.Content visible>
           <Card fluid raised color="green"
                 onClick={()=>this.props.handleClick(this.props.group)}>
             <Card.Content>
@@ -59,11 +59,11 @@ class GroupCard extends Component {
               </Link>
             </Card.Content>
           </Card>
-          </Reveal.Content>
-          <Reveal.Content hidden>
-            <Image circular size='small' src='https://images.pexels.com/photos/416443/pexels-photo-416443.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' />
-          </Reveal.Content>
-        </Reveal>
+        //   </Reveal.Content>
+        //   <Reveal.Content hidden>
+        //     <Image circular size='small' src='https://images.pexels.com/photos/416443/pexels-photo-416443.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' />
+        //   </Reveal.Content>
+        // </Reveal>
           
     );
   }
