@@ -14,7 +14,9 @@
   pointer-events: none;
 }
 
-
+.welcome {
+  color: white;
+}
 
 
 .ui.centered.fluid.image {

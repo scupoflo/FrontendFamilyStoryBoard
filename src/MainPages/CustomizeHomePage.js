@@ -46,6 +46,7 @@ class CustomizeHomePage extends Component {
 
   handleDeleteGroup = (groupToDelete) => {
     console.log(groupToDelete)
+    
     let newArr= this.state.allGroups.filter(group =>  {
       return group.id !== groupToDelete.id
     })
@@ -53,6 +54,24 @@ class CustomizeHomePage extends Component {
       allGroups: newArr
     })     
   }
+
+  handleDeletePost = (postToDelete) => {
+    console.log(postToDelete)
+    fetch(`http://localhost:3000/api/v1/posts`, {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({id: postToDelete.id})
+    })
+    .then(res => res.text())
+    .then(res => console.log(res))
+    
+    // let newArr= this.state.allPosts.filter(post=>  {
+    //   return post.id !== postToDelete.id
+    // })
+    // this.setState({
+    //   allPosts: newArr
+    // })     
+   }
 
   // handleAddRequestingMember = () => {
   //   this.props.allGroups.map(group=> {

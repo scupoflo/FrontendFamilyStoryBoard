@@ -31,12 +31,12 @@ export default class facebook extends Component {
             fbContent=(
                 <div style={{
                     width: '400px',
-                    margin: 'auto',
-                    background: '#f4f4f4',
+                    margin: 'responsive',
+                    // background: '#f4f4f4',
                     padding:'20px'
                 }}>
-                    <img src={this.state.picture} size= "medium" alt={this.state.name}/>
-                    <h2> Welcome {this.state.name}</h2>
+                    <img src={this.state.picture} size= "large" alt={this.state.name}/>
+                    <h2 className='welcome'> Welcome {this.state.response}</h2>
                     Email: {this.state.email}
                 </div>
             );

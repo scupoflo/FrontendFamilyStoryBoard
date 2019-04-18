@@ -17,18 +17,19 @@ class GroupShowPage extends Component {
   }
 
 componentDidMount = () => {
-  fetch(`http://localhost:3000/api/v1/users`)
+  fetch(`http://localhost:3000/api/v1/posts`)
   .then(resp => resp.json())
-  .then(allData => {
-    console.log(allData[0].posts)
-    let firstUserPostData= allData[0].posts
+  .then(allPosts => {
+    // console.log(allData[0].posts)
       return this.setState({
-        allPosts:firstUserPostData,
-        author: allData[0]
+        allPosts:allPosts
       })
   }
  )
 }
+
+
+
 
 handleNewPost = (newPost) => {
   console.log(newPost)
@@ -37,8 +38,36 @@ handleNewPost = (newPost) => {
     })
   }
 
+  // DELETE EXAMPLE
+  // https://stackoverflow.com/questions/40284338/react-fetch-delete-and-put-requests
+//   fetch('https://example.com/delete-item/', {
+//   method: 'DELETE',
+//   headers: {'Content-Type': 'application/json'},
+//   body: JSON.stringify({id: '5bdcdfa40f0a326f858feae0'})
+// })
+// .then(res => res.text())
+// .then(res => alert(res)) 
+// Collapse
 
-
+  handleDeletePost = (postToDelete) => {
+    console.log(postToDelete)
+    fetch(`http://localhost:3000/api/v1/posts/${postToDelete.id}`, {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({id: postToDelete.id})
+    })
+    .then(res => res.text())
+    .then(res => console.log(res))
+    
+    // let newArr= this.state.allPosts.filter(post=>  {
+    //   return post.id !== postToDelete.id
+    // })
+    // this.setState({
+    //   allPosts: newArr
+    // })     
+   }
+  
+  
   
 
   render() {
@@ -58,20 +87,21 @@ handleNewPost = (newPost) => {
          
 
           <Grid.Row>
-              <Grid.Column  width={8}>
+              {/* <Grid.Column  width={8}>
                 <PersonalPostModal 
                   handleNewPost={this.handleNewPost}
                   author={this.state.author}
                   allPosts={this.state.allPosts}
                 />
-              </Grid.Column>
+              </Grid.Column> */}
 
-              <Grid.Column  width={8}>
+              <Grid.Column centered >
                 <FamilyPostModal
                   group={this.props.group}
                   handleNewPost={this.handleNewPost}
                   author={this.state.author}
                   allPosts={this.state.allPosts}
+                  handleDeletePost={this.handleDeletePost}
                 />
               </Grid.Column>
           </Grid.Row>

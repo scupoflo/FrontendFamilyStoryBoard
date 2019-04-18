@@ -21,9 +21,9 @@ const FamilyPostModal = (props) => (
     <Modal trigger={ <Button color='green' size='massive'>Stories About Family</Button>}>
       <Modal.Header floated='right'> <h1> Stories About Family!</h1>
       <Modal.Content image>
-        {/* <div className='image'> */}
+        
           <Image wrapped size ='medium' spaced='left' src={props.group.picture} />
-        {/* </div> */}
+        
       </Modal.Content>
       </Modal.Header>
         <Modal.Description>
@@ -32,11 +32,11 @@ const FamilyPostModal = (props) => (
           
             <Item.Group divided>
             {props.allPosts.map(post => { 
-              return <Item centered>
+              return <Item centered onClick={()=> props.handleDeletePost(post)}>
                   <Item.Content>
                       <Item.Header textAlign='center' as='a'>{post.title}</Item.Header>
                       <Item.Meta>
-                        {/* <span>Date</span> */}
+                        
                         <span>{post.author}</span>
                       </Item.Meta>
                       <Item.Extra>

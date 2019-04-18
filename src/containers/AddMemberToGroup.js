@@ -71,7 +71,7 @@ componentDidMount = () => {
     if(!this.state.selectedToShow){
       return (
       <div>
-        <h1>Create a New Card to Add to Your Family Tree!</h1>
+        <h1 className='welcome'>Create a New Card to Add to Your Family Tree!</h1>
       </div>
       )
     }else{
