@@ -19,18 +19,20 @@ class FamilyTree extends Component {
   }
 
   componentDidMount = () => {
-      fetch(`http://localhost:3000/api/v1/groups`)
+    fetch(`http://localhost:3000/api/v1/groups`)
       .then(resp => resp.json())
       .then(allGroupData => {
+        console.log(allGroupData)
+        // debugger
         let withOutRepeatsArr= allGroupData.slice(0,6)
-       return this.setState({
-         allGroups:withOutRepeatsArr,
-         loading:false,
-         allMembers: allGroupData.members
-       })
-      }
-     )
-    }
+          return this.setState({
+            allGroups:withOutRepeatsArr,
+            loading:false,
+            allMembers: allGroupData.members
+          })
+          console.log(this.allGroupData)
+      })
+  }
 
     handleClick = (groupObj) => {
       console.log(groupObj)
@@ -41,7 +43,7 @@ class FamilyTree extends Component {
       console.log(this.props.groupObj)
       console.log(this.props.group)
       if(this.props.group.members.length > 0){
-      return this.props.group.members.map(member=> this.setState({allMembers: [...this.state.allMembers, member] }) ) 
+      return this.props.group.members.map(member=> this.setState({allMembers: [...this.state.allMembers, member] }) )
       }
     }
 
@@ -62,7 +64,7 @@ class FamilyTree extends Component {
                     let group= this.state.allGroups.find(g => g.id === groupId)
                     console.log("group exists?", group)
                     return this.state.loading ? null : (
-                        <GroupShowPage 
+                        <GroupShowPage
                           group={group}
                           groupObj={this.state.selectedCard}
                         />
@@ -80,8 +82,8 @@ class FamilyTree extends Component {
                <Route
                 path="/"
                 render={ (props)=>
-                  
-                  <Home 
+
+                  <Home
                   allGroups={this.state.allGroups}
                   handleClick= {this.handleClick}
                   groupObj={this.state.selectedCard}
