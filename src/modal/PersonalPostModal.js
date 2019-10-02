@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Image, Modal } from 'semantic-ui-react'
 import SingleStoryModal from './SingleStoryModal'
 import { Button,Item,Header,Container} from 'semantic-ui-react'
@@ -32,14 +32,14 @@ const PersonalModal = (props) => (
         <Header as='h3' content='Share all Your Favorite Stories!' style={style.h3} textAlign='center' />
         <Container>
            <Item.Group divided>
-            {props.allPosts.map(post => 
+            {props.allPosts.map(post =>
 
-                post.author_id === 1 ? 
+                post.author_id === 1 ?
                   <Item centered>
                   <Item.Content>
                     <Item.Header textAlign='center' as='a'>{post.title}</Item.Header>
                     <Item.Meta>
-                     
+
                       <span>{post.author}</span>
                     </Item.Meta>
                     <Item.Extra>
@@ -56,7 +56,7 @@ const PersonalModal = (props) => (
             </Item.Group>
           </Container>
         </Modal.Description>
-  
+
       <Modal.Actions>
         <SingleStoryModal handleNewPost={props.handleNewPost}/>
       </Modal.Actions>

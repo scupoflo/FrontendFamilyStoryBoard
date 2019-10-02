@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Grid} from 'semantic-ui-react'
 import MemberCard from '../components/MemberCard';
-import PersonalPostModal from '../modal/PersonalPostModal'
 import FamilyPostModal from '../modal/FamilyPostModal'
 import { Card } from 'semantic-ui-react'
 
@@ -12,7 +11,7 @@ class GroupShowPage extends Component {
       this.state= {
         allPosts: [],
         author: null
-        
+
     }
   }
 
@@ -46,7 +45,7 @@ handleNewPost = (newPost) => {
 //   body: JSON.stringify({id: '5bdcdfa40f0a326f858feae0'})
 // })
 // .then(res => res.text())
-// .then(res => alert(res)) 
+// .then(res => alert(res))
 // Collapse
 
   handleDeletePost = (postToDelete) => {
@@ -58,17 +57,17 @@ handleNewPost = (newPost) => {
     })
     .then(res => res.text())
     .then(res => console.log(res))
-    
+
     // let newArr= this.state.allPosts.filter(post=>  {
     //   return post.id !== postToDelete.id
     // })
     // this.setState({
     //   allPosts: newArr
-    // })     
+    // })
    }
-  
-  
-  
+
+
+
 
   render() {
     return (
@@ -76,19 +75,19 @@ handleNewPost = (newPost) => {
           <Grid.Row centered>
             <Grid.Column centered >
               <Card.Group centered itemsPerRow={6}>
-                {this.props.group.members.map(member=>        
-                  <MemberCard 
+                {this.props.group.members.map(member=>
+                  <MemberCard
                   key={member.name}
                   member={member}/>
                 )}
               </Card.Group>
             </Grid.Column>
           </Grid.Row>
-         
+
 
           <Grid.Row>
               {/* <Grid.Column  width={8}>
-                <PersonalPostModal 
+                <PersonalPostModal
                   handleNewPost={this.handleNewPost}
                   author={this.state.author}
                   allPosts={this.state.allPosts}
@@ -106,7 +105,7 @@ handleNewPost = (newPost) => {
               </Grid.Column>
           </Grid.Row>
 
-        
+
 
       </Grid>
 

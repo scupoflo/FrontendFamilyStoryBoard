@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react'
-import { Button, Checkbox, Form, TextArea} from 'semantic-ui-react'
-import Dropdown from '../containers/DropDown'
+import { Button, Form} from 'semantic-ui-react'
+
 
 class CreateGroup extends Component {
     constructor(props){
@@ -12,22 +12,22 @@ class CreateGroup extends Component {
           picture: '',
         }
       }
-        
-    
+
+
       handleInputChange = (event) => {
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
-  
+
         this.setState({
           [name]: value
         });
       }
-  
+
     // handleAuthorChange = (e, { value }) => {
     //     console.log(value)
     // }
-     
+
     handleSubmit = event => {
       event.preventDefault();
       fetch('http://localhost:3000/api/v1/groups', {
@@ -42,42 +42,41 @@ class CreateGroup extends Component {
         return this.props.handleShowCard(newGroup) && this.props.addGroup(newGroup)
       })
     }
-  
-   
-   
+
+
+
     render() {
       return (
         <Form onSubmit={this.handleSubmit}>
           Add New Group Card
           <Form.Field>
             <label>Name</label>
-            <input 
+            <input
               type="text"
-              name="name" 
-              placeholder='Name' 
+              name="name"
+              placeholder='Name'
               value={this.state.name}
                onChange={event => this.handleInputChange(event)}
               />
           </Form.Field>
-          
-         
-          
+
+
+
           <Form.Field>
             <label>Picture</label>
-            <input 
+            <input
               placeholder='Add a picture if you have one!'
               type="text"
-              name="picture" 
+              name="picture"
                onChange={event => this.handleInputChange(event)}
               value={this.state.picture} />
           </Form.Field>
-  
+
       <Button type='submit'>Submit</Button>
-  
-    </Form>        
+
+    </Form>
       )
     }
   }
-  
+
   export default CreateGroup
-  

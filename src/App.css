@@ -1,10 +1,10 @@
 .App {
   text-align: center;
-  background-image: url('https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
-  background-repeat: no-repeat;
+  /* background-image: url('https://images.pexels.com/photos/36717/amazing-animal-beautiful-beautifull.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'); */
+  /* background-repeat: no-repeat; */
   background-position: center top;
-  background-color: #000000;
-  height: 2000px;
+  background-color: #F0F8FF;
+  /* height: 2000px; */
   /* margin-right: 0px; */
 }
 
@@ -15,7 +15,7 @@
 }
 
 .welcome {
-  color: white;
+  color: deepskyblue;
 }
 
 
@@ -115,5 +115,5 @@
 
 .groupCard {
   max-height: 436.82px;
-  min-height: 436.82px 
+  min-height: 436.82px
 }

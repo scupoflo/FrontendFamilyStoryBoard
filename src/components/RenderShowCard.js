@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Card, Image } from 'semantic-ui-react'
+import {Card, Image } from 'semantic-ui-react'
 
 
 class RenderShowCard extends Component {
@@ -16,27 +16,27 @@ class RenderShowCard extends Component {
       console.log(this.props.selectedToShow)
     return (
           <Card fluid raised color="green" onClick={this.props.handleAddMemberToGroup}>
-            <Card.Content> 
-              
-              <Card.Header>{this.props.selectedToShow.name}</Card.Header> 
-              
+            <Card.Content>
+
+              <Card.Header>{this.props.selectedToShow.name}</Card.Header>
+
               <Image size='small' src={this.props.selectedToShow.picture} />
               <Card.Meta></Card.Meta>
               <Card.Description>
                   { (this.props.selectedToShow.relationship) ? <strong>{this.props.selectedToShow.relationship}</strong> : null }
-                
-               
-              </Card.Description> 
+
+
+              </Card.Description>
               <Card.Description>
-               
-              </Card.Description> 
+
+              </Card.Description>
             </Card.Content>
 
           </Card>
     );
-  } 
+  }
 
-  
+
 
 
 

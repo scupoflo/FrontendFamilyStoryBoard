@@ -4,18 +4,16 @@ import CustomizeHomePage from './CustomizeHomePage';
 import GroupShowPage from './GroupShowPage'
 import Home from './Home'
 
-
-
 class FamilyTree extends Component {
   constructor(){
     super()
-    this.state={
-      allGroups:[],
-      searchTerm: "",
-      loading:true,
-      selectedCard:null,
-      allMembers:[]
-    }
+      this.state = {
+        allGroups: [],
+        searchTerm: "",
+        loading: true,
+        selectedCard: null,
+        allMembers: []
+      }
   }
 
   componentDidMount = () => {
@@ -30,7 +28,7 @@ class FamilyTree extends Component {
             loading:false,
             allMembers: allGroupData.members
           })
-          console.log(this.allGroupData)
+          // console.log(this.allGroupData)
       })
   }
 

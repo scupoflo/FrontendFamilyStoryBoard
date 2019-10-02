@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button, Checkbox, Form, TextArea} from 'semantic-ui-react'
+import {Button,Form, TextArea} from 'semantic-ui-react'
 
 class CreatePost extends Component {
   constructor(props){
@@ -18,8 +18,8 @@ class CreatePost extends Component {
         event.preventDefault()
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-    
+
+
         this.setState({
           [stateToChange]: value
         })
@@ -28,20 +28,20 @@ class CreatePost extends Component {
 
   // handleAuthorChange = (event) => {
     // if(this.state.author === "Shinik Cupo")
-  //     this.setState({ author: 1})  
+  //     this.setState({ author: 1})
   // }
 
-  handleChange = (e) => {  
-    
+  handleChange = (e) => {
+
     console.log('something is happening')
       console.log(e.target)
       console.log(e.target.type)
-      console.log(e.target.value)  
+      console.log(e.target.value)
       this.setState({
         value: e.target.value
       });
   }
-   
+
   handleCreateSubmit = event => {
     event.preventDefault();
     fetch('http://localhost:3000/api/v1/posts', {
@@ -54,61 +54,61 @@ class CreatePost extends Component {
     .then(newPost => this.props.handleNewPost(newPost))
   }
 
-  
- 
- 
+
+
+
   render() {
     return (
       <Form onSubmit= {this.handleCreateSubmit}>
     <Form.Field>
       <label>Title</label>
-      <input 
+      <input
         type="text"
-        name="title" 
-        placeholder='Title' 
-        onChange={(e) => this.handleInputChange(e,"title")} 
+        name="title"
+        placeholder='Title'
+        onChange={(e) => this.handleInputChange(e,"title")}
         value={this.state.title}/>
     </Form.Field>
     <Form.Field>
       <label>Subject</label>
-      <input 
+      <input
         placeholder='Subject'
         type="text"
-        name="subject" 
+        name="subject"
         value={this.state.subject}
         onChange={(e) => this.handleInputChange(e,"subject")}   />
     </Form.Field>
-    
+
         <Form.Field>
       <label>Author</label>
-      <input 
+      <input
         placeholder='Author'
         type="text"
-        name="author" 
+        name="author"
         value={this.state.author}
         onChange={(e) => this.handleInputChange(e,"author_id")}   />
     </Form.Field>
     <Form.Field>
-        <TextArea 
-            placeholder='Tell us stories!' 
+        <TextArea
+            placeholder='Tell us stories!'
             type="text"
-            name="body" 
+            name="body"
             value={this.state.body}
             onChange={(e) => this.handleInputChange(e,"body")}   />
     </Form.Field>
     <Form.Field>
       <label>Picture</label>
-      <input 
+      <input
         placeholder='Add a picture if you have one!'
         type="text"
-        name="picture" 
-        onChange={(e) => this.handleInputChange(e,"picture")} 
+        name="picture"
+        onChange={(e) => this.handleInputChange(e,"picture")}
         value={this.state.picture} />
     </Form.Field>
     <Button type='submit' value="Submit">Submit</Button>
   </Form>
 
-        
+
     )
   }
 }

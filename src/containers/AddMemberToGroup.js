@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import {Grid, GridRow, GridColumn} from 'semantic-ui-react'
-import MemberCard from '../components/MemberCard';
-import GroupCard from '../components/GroupCard'
 import CreateMember from '../MainPages/CreateMember'
 import CreateGroup from '../MainPages/CreateGroup'
 import RenderShowCard from '../components/RenderShowCard'
-
-import _ from 'lodash'
-
 
 class AddMemberToGroup extends Component {
   constructor(props){
@@ -16,9 +11,8 @@ class AddMemberToGroup extends Component {
         allGroups: [],
         selectedGroup: {},
         selectedMember:{},
-        allMembers:[]       
-        
-    }
+        allMembers:[]
+      }
   }
 
 componentDidMount = () => {
@@ -29,8 +23,7 @@ componentDidMount = () => {
         allGroups:allData,
         selectedToShow:null
       })
-  }
- )
+  })
 }
 
 //  handleSubmit = event => {
@@ -46,7 +39,7 @@ componentDidMount = () => {
 //     .then(newMember => this.props.handleAddMemberToGroup(newMember))
 //   }
 
-  
+
   handleChange = (event) => {
     event.persist()
     this.setState(
@@ -62,7 +55,7 @@ componentDidMount = () => {
       this.setState({selectedToShow: object})
     } else{
       console.log('its a group!')
-      this.setState({selectedToShow: object}) 
+      this.setState({selectedToShow: object})
     }
     this.props.addToShow(this.state.selectedToShow)
   }
@@ -76,13 +69,13 @@ componentDidMount = () => {
       )
     }else{
       console.log(this.state.selectedToShow)
-     
+
     return (
-      
+
       <div>
-         <RenderShowCard 
-          selectedToShow={this.state.selectedToShow}/> 
-          <p>Working...</p> 
+         <RenderShowCard
+          selectedToShow={this.state.selectedToShow}/>
+          <p>Working...</p>
       </div>
     )};
   }
@@ -93,32 +86,32 @@ componentDidMount = () => {
       <Grid celled>
 
           <Grid.Row>
-          {/* {this.props.group.members.map(member=> 
+          {/* {this.props.group.members.map(member=>
                 <MemberCard member={member}/>)} */}
           </Grid.Row>
 
           <Grid.Row>
               <Grid.Column floated="left" width={8}>
-                <CreateMember 
+                <CreateMember
                   handleShowCard={this.handleShowCard}
                   addMember={this.props.addMember}
                 />
-                
-                
+
+
               </Grid.Column>
           </Grid.Row>
 
         <GridRow>
           <GridColumn>
             {this.loadingIndicator()}
-            
+
           </GridColumn>
         </GridRow>
 
 
         <Grid.Row>
-          <Grid.Column> 
-          <CreateGroup 
+          <Grid.Column>
+          <CreateGroup
             handleShowCard={this.handleShowCard}
             addGroup={this.props.addGroup}/>
           </Grid.Column>

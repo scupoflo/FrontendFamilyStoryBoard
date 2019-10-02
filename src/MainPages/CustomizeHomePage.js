@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import {Grid,Card} from 'semantic-ui-react'
-import _ from 'lodash'
+import {Grid} from 'semantic-ui-react'
 import EditGroupList from '../containers/EditGroupList'
-
 import RequestFamilyCard from '../components/RequestFamilyCard';
-
 import AddMemberToGroup from '../containers/AddMemberToGroup';
 
 
@@ -20,7 +17,7 @@ class CustomizeHomePage extends Component {
     }
   }
 
-  
+
 
   handleClick = (group) => {
     console.log('Group clicked:', group.name)
@@ -36,48 +33,46 @@ class CustomizeHomePage extends Component {
     })
     this.setState({
       allMembers: newArr
-    })     
+    })
   }
 
   addToShow = (object) => {
-    
     console.log('YESSSSS',object)
-    }
+  }
 
   handleDeleteGroup = (groupToDelete) => {
     console.log(groupToDelete)
-    
-    let newArr= this.state.allGroups.filter(group =>  {
+    let newArr= this.state.allGroups.filter(group => {
       return group.id !== groupToDelete.id
     })
     this.setState({
       allGroups: newArr
-    })     
+    })
   }
 
   handleDeletePost = (postToDelete) => {
     console.log(postToDelete)
     fetch(`http://localhost:3000/api/v1/posts`, {
-    method: 'DELETE',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({id: postToDelete.id})
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({id: postToDelete.id})
     })
     .then(res => res.text())
     .then(res => console.log(res))
-    
+
     // let newArr= this.state.allPosts.filter(post=>  {
     //   return post.id !== postToDelete.id
     // })
     // this.setState({
     //   allPosts: newArr
-    // })     
+    // })
    }
 
   // handleAddRequestingMember = () => {
   //   this.props.allGroups.map(group=> {
   //     if(group.members.length > 0){
   //       group.members.map(member=> (
-  //       this.setState({ 
+  //       this.setState({
   //         allMembers: [...this.state.allMembers, member]
   //       })
   //       ))
@@ -106,15 +101,15 @@ class CustomizeHomePage extends Component {
     .then(([allGroups, allMembers])=>{
       console.log(allGroups);
       console.log(allMembers);
-      
- 
+
+
       return this.setState({
         allGroups: allGroups,
         allMembers: allMembers,
       })
     })
   }
-   
+
   addMember=(newMember)=>{
     this.setState({
       allMembers: [...this.state.allMembers, newMember]
@@ -134,14 +129,14 @@ class CustomizeHomePage extends Component {
   //     fetch(‘http://localhost:3000/users/1’),
   //     fetch(‘http://localhost:3000/users/1/messages’),
   //     fetch(‘http://localhost:3000/users’)
- 
+
   //   ])
   //   .then(([res1, res2) => Promise.all([res1.json(), res2.json()]))
   //   .then(([allGroups, allMembers])=>{
   //     console.log(allGroups);
   //     console.log(allMembers);
-      
- 
+
+
   //     return this.setState({
   //       allGroups: allGroups,
   //       allMembers: allMembers,
@@ -155,62 +150,46 @@ class CustomizeHomePage extends Component {
       <Grid columns='equal' >
         <Grid.Column  width={5}>
             <AddMemberToGroup
-                allGroups={this.state.allGroups}  
+                allGroups={this.state.allGroups}
                 chosenGroup={this.state.chosenGroup}
                 handleAddMemberToGroup={this.handleAddMemberToGroup}
                 addToShow={this.addToShow}
-                handleAddMemberToGroup={this.handleAddMemberToGroup}
                 addMember={this.addMember}
             />
-          
         </Grid.Column>
 
 
         <Grid.Column width={11}>
-          
-            <EditGroupList 
-              allGroups={this.state.allGroups} 
+            <EditGroupList
+              allGroups={this.state.allGroups}
               handleClick={this.handleClick}
               addGroup={this.addGroup}
-              handleDeleteGroup={this.handleDeleteGroup}    
+              handleDeleteGroup={this.handleDeleteGroup}
             />
-          
       	</Grid.Column>
+
+        <Grid.Row>
+          {/* <SearchBar
+               onSearchChange={_.debounce(this.handleSearchChange, 500)}
+               showNoResults={false}
+          />   */
+          }
+        </Grid.Row>
 
 
         <Grid.Row>
-          
-          {/* <SearchBar
-               onSearchChange={_.debounce(this.handleSearchChange, 500)}
-               showNoResults={false} 
-          />   */}
-        </Grid.Row>
-        
-       
-          <Grid.Row> 
-          
-            {this.state.allMembers.map(member=>  
-              <Grid.Column>
-                
-                  <RequestFamilyCard 
+          {this.state.allMembers.map(member=>
+            <Grid.Column>
+              <RequestFamilyCard
                     member={member}
                     handleDelete={this.handleDelete}
-                  />
-                
-              </Grid.Column>
-              )}
-        
-          
-         
-            
-        
+              />
+            =</Grid.Column>
+          )}
         </Grid.Row>
-        
       </Grid>
-   
     );
   }
 }
 
 export default CustomizeHomePage;
-

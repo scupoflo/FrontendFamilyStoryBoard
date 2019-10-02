@@ -6,18 +6,11 @@ import { Button, Segment } from 'semantic-ui-react'
 import Facebook from '../facebook'
 
 class Home extends Component {
-  constructor(){
-    super()
-      this.state= {
-        allGroups: [],
-        selectedCard:{}
-      }
-  }
 
   render() {
     return (
-      <Grid columns='equal' >
-        <Grid.Column floated='left' width={9} centered className="welcome">
+      <Grid>
+        <Grid.Column floated="left" width={9} className="welcome">
           <h1 className="welcome">Welcome to Family StoryBoard!</h1>
           <h3 className="welcome">Where the Apple Doesn't Fall Far From the Tree </h3>
         </Grid.Column>
@@ -26,8 +19,8 @@ class Home extends Component {
           <Facebook />
         </Grid.Column>
 
-        <Grid.Row centered>
-          <Grid.Column centered >
+        <Grid.Row>
+          <Grid.Column>
             <GroupList
               allGroups={this.props.allGroups}
               handleClick= {this.props.handleClick}
@@ -38,7 +31,7 @@ class Home extends Component {
         </Grid.Row>
 
         <Grid.Row>
-          <Grid.Column centered >
+          <Grid.Column>
             <Segment compact>
                   <Link to= "/editHome">
                     <Button inverted color='purple'>
